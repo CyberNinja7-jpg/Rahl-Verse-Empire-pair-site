@@ -15,7 +15,7 @@ const { Boom } = require("@hapi/boom");
 const MESSAGE = process.env.MESSAGE ||  `
 *🎉 SESSION GENERATED SUCCESSFULLY! ✅*
 
-*💪 Empowering Your Experience with Hunter xmd Bot*
+*💪 powerthroughknowledge.Controlthroughcode*
 
 *🌟 Show your support by giving our repo a star! 🌟*
 🔗 https://https://whatsapp.com/channel/0029VbALNKAAe5VjwDCu7l2E
