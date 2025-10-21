@@ -825,7 +825,7 @@
         if (response.data && response.data.code) {
           const code = response.data.code;
           showResult(`
-            <p>Your Lord Rahl gave you this code for Rahl Xmd pairing :</p>
+            <p> Lord Rahl gave you this code for Rahl Xmd pairing :</p>
             <div class="code-display">${code}</div>
             <p>This code will expire in 5 minutes</p>
           `, 'success');
@@ -835,12 +835,12 @@
           copyCodeButton.dataset.code = code;
           whatsappButton.dataset.number = fullNumber;
         } else {
-          showResult('Service unavailable. Please try again later.', 'error');
+          showResult('Service unavailable.  Lord Rahl is Working,Please try again later.', 'error');
         }
       } catch (error) {
         console.error('Error:', error);
         const errorMsg = error.response?.data?.message || 
-                        'An error occurred. Please try again later.';
+                        'An error occurred.Lord Rahl is Working,Please try again later.';
         showResult(errorMsg, 'error');
       } finally {
         submitButton.disabled = false;
