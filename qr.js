@@ -25,7 +25,7 @@ const MESSAGE = process.env.MESSAGE ||  `
 https://whatsapp.com/channel/0029VbAKbSjBA1ep4NkKGd1Y
 
 *📚 Learn & Explore More with Tutorials:*
-🪄 YouTube Channel https://youtube.com/@obetech12?si=urZpt-b7F8StY5TV
+🪄 YouTube Channel https://whatsapp.com/channel/0029VbALNKAAe5VjwDCu7l2E
 
 *🥀 Powered by Rahl xmd 🥀*
 *Power thtough knowledge control through code! 🚀*
