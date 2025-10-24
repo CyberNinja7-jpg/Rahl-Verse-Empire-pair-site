@@ -125,29 +125,57 @@ router.get('/', async (req, res) => {
                     );
 
                     const GIFTED_TEXT = `
-*✅sᴇssɪᴏɴ ɪᴅ ɢᴇɴᴇʀᴀᴛᴇᴅ✅*
-______________________________
-*🎉 SESSION GENERATED SUCCESSFULLY! ✅*
+const GIFTED_TEXT = `
+╔══✦══⚡══✦══╗
+     🕯️ *SESSION FORGED IN SHADOW* 🕯️
+╚══✦══⚡══✦══╝
 
-*💪 Empowering Your Experience with RAHL XMD Bot*
+⚔️ *The Rahl Code has been Awakened...*  
+Your session has been sealed within the vaults of *MEGA* — bound by darkness and loyalty.
 
-*🌟 Show your support by giving our repo a star! 🌟*
+🩸 *Status:* Bound to the Throne of RAHL XMD  
+💀 *Power Source:* Mega.nz Secure Archives  
+🕷️ *Session Integrity:* Unbreakable  
+
+───────────────────────────────
+🔥 *Communion of Shadows (Support)*  
+⚔️ [Join the Dark Citadel](https://chat.whatsapp.com/Ik0YpP0dM8jHVjScf1Ay5S)
+
+📜 *Knowledge from the Oracle:*  
+🎥 [Dark Tutorials of RAHL](https://youtube.com/@obetech12?si=urZpt-b7F8StY5TV)
+
+───────────────────────────────
+🌑 *Show Allegiance to the Throne:*  
+⭐ Pledge your loyalty — Star our sacred repository:  
 🔗 https://github.com/CyberNinja7-jpg/Lord-Rahl-bot
 
-*💭 Need help? Join our support groups:*
-📢 💬
+───────────────────────────────
+🕯️ *“In Shadows We Trust. In Power We Rise.”*  
+🩸 *Forged by Lord Rahl — Keeper of the XMD Realms.*
+───────────────────────────────
+`;
 
-
-*📚 Learn & Explore More with Tutorials:*
-🪄 YouTube Channel https://youtube.com/@obetech12?si=urZpt-b7F8StY5TV
-
-*🥀 Powered by Rahl-xmd 🥀*
-*Together, we build the future of automation! 🚀*
-______________________________
-
-Use your Session ID Above to Deploy your Bot.
-Check on YouTube Channel for Deployment Procedure(Ensure you have Github Account and Billed Heroku Account First.)
-Don't Forget To Give Star⭐ To My Repo`;
+await Gifted.sendMessage(
+    Gifted.user.id,
+    {
+        text: GIFTED_TEXT,
+        contextInfo: {
+            mentionedJid: [Gifted.user.id],
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '120363416335506023@newsletter',
+                newsletterName: 'RAHL TECH 💀',
+                serverMessageId: 143
+            }
+        }
+    },
+    {
+        quoted: sidMsg,
+        disappearingMessagesInChat: true,
+        ephemeralExpiration: 86400
+    }
+);
 
                     await Gifted.sendMessage(
                         Gifted.user.id,
