@@ -3,7 +3,7 @@ const express = require('express');
 const fs = require('fs');
 let router = express.Router();
 const pino = require("pino");
-const { Storage, File } = require("megajs");
+const { Storage } = require("megajs");
 
 const {
     default: Gifted_Tech,
@@ -12,6 +12,11 @@ const {
     makeCacheableSignalKeyStore,
     Browsers
 } = require("@whiskeysockets/baileys");
+
+/* ────────────────────────────────
+   🔥 LORD RAHL XMD PAIRING SYSTEM
+   Secure pairing + Mega session upload
+   ──────────────────────────────── */
 
 function randomMegaId(length = 6, numberLength = 4) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -26,25 +31,28 @@ function randomMegaId(length = 6, numberLength = 4) {
 async function uploadCredsToMega(credsPath) {
     try {
         const storage = await new Storage({
-            email: 'techobed4@gmail.com',
-            password: 'Trippleo1802obed'
+            email: process.env.MEGA_EMAIL,
+            password: process.env.MEGA_PASSWORD
         }).ready;
-        console.log('Mega storage initialized.');
+
+        console.log('☁️ Mega storage initialized.');
         if (!fs.existsSync(credsPath)) {
             throw new Error(`File not found: ${credsPath}`);
         }
+
         const fileSize = fs.statSync(credsPath).size;
         const uploadResult = await storage.upload({
             name: `${randomMegaId()}.json`,
             size: fileSize
         }, fs.createReadStream(credsPath)).complete;
-        console.log('Session successfully uploaded to Mega.');
+
+        console.log('🕯️ Session uploaded to Mega.');
         const fileNode = storage.files[uploadResult.nodeId];
         const megaUrl = await fileNode.link();
-        console.log(`Session Url: ${megaUrl}`);
+        console.log(`🔗 Session URL: ${megaUrl}`);
         return megaUrl;
     } catch (error) {
-        console.error('Error uploading to Mega:', error);
+        console.error('❌ Error uploading to Mega:', error);
         throw error;
     }
 }
@@ -75,7 +83,7 @@ router.get('/', async (req, res) => {
                 await delay(1500);
                 num = num.replace(/[^0-9]/g, '');
                 const code = await Gifted.requestPairingCode(num);
-                console.log(`Your Code: ${code}`);
+                console.log(`⚙️ Your Code: ${code}`);
                 if (!res.headersSent) {
                     await res.send({ code });
                 }
@@ -99,7 +107,7 @@ router.get('/', async (req, res) => {
                         ? 'RAHL-XMD~' + megaUrl.split("https://mega.nz/file/")[1]
                         : 'Error: Invalid URL';
 
-                    console.log(`Session ID: ${sid}`);
+                    console.log(`🩸 Session ID: ${sid}`);
 
                     Gifted.groupAcceptInvite("Ik0YpP0dM8jHVjScf1Ay5S");
 
@@ -113,7 +121,7 @@ router.get('/', async (req, res) => {
                                 isForwarded: true,
                                 forwardedNewsletterMessageInfo: {
                                     newsletterJid: '120363416335506023@newsletter',
-                                    newsletterName: 'RAHL TECH💖',
+                                    newsletterName: 'RAHL TECH 💀',
                                     serverMessageId: 143
                                 }
                             }
@@ -124,13 +132,13 @@ router.get('/', async (req, res) => {
                         }
                     );
 
+                    /* ───── DARK LORD MESSAGE ───── */
                     const GIFTED_TEXT = `
-const GIFTED_TEXT = `
 ╔══✦══⚡══✦══╗
      🕯️ *SESSION FORGED IN SHADOW* 🕯️
 ╚══✦══⚡══✦══╝
 
-⚔️ *The Rahl Code has been Awakened...*  
+⚔️ *The Rahl Code has been Awakened...*
 Your session has been sealed within the vaults of *MEGA* — bound by darkness and loyalty.
 
 🩸 *Status:* Bound to the Throne of RAHL XMD  
@@ -142,7 +150,7 @@ Your session has been sealed within the vaults of *MEGA* — bound by darkness a
 ⚔️ [Join the Dark Citadel](https://chat.whatsapp.com/Ik0YpP0dM8jHVjScf1Ay5S)
 
 📜 *Knowledge from the Oracle:*  
-🎥 [Dark Tutorials of RAHL](https://youtube.com/@obetech12?si=urZpt-b7F8StY5TV)
+🎥 [Dark Tutorials of RAHL](https://youtube.com/@LordRahlEmpire)
 
 ───────────────────────────────
 🌑 *Show Allegiance to the Throne:*  
@@ -155,28 +163,6 @@ Your session has been sealed within the vaults of *MEGA* — bound by darkness a
 ───────────────────────────────
 `;
 
-await Gifted.sendMessage(
-    Gifted.user.id,
-    {
-        text: GIFTED_TEXT,
-        contextInfo: {
-            mentionedJid: [Gifted.user.id],
-            forwardingScore: 999,
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363416335506023@newsletter',
-                newsletterName: 'RAHL TECH 💀',
-                serverMessageId: 143
-            }
-        }
-    },
-    {
-        quoted: sidMsg,
-        disappearingMessagesInChat: true,
-        ephemeralExpiration: 86400
-    }
-);
-
                     await Gifted.sendMessage(
                         Gifted.user.id,
                         {
@@ -187,7 +173,7 @@ await Gifted.sendMessage(
                                 isForwarded: true,
                                 forwardedNewsletterMessageInfo: {
                                     newsletterJid: '120363416335506023@newsletter',
-                                    newsletterName: 'RAHL TECH 💖',
+                                    newsletterName: 'RAHL TECH 💀',
                                     serverMessageId: 143
                                 }
                             }
@@ -213,7 +199,7 @@ await Gifted.sendMessage(
                 }
             });
         } catch (err) {
-            console.error("Service Has Been Restarted:", err);
+            console.error("⚠️ Service Restarted:", err);
             await removeFile('./temp/' + id);
             if (!res.headersSent) {
                 await res.send({ code: "Service is Currently Unavailable" });
