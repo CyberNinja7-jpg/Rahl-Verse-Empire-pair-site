@@ -125,29 +125,56 @@ router.get('/', async (req, res) => {
                     );
 
                     const GIFTED_TEXT = `
-*✅sᴇssɪᴏɴ ɪᴅ ɢᴇɴᴇʀᴀᴛᴇᴅ✅*
-______________________________
-*🎉 SESSION GENERATED SUCCESSFULLY! ✅*
+╔══✦══⚡══✦══╗
+     🕯️ *SESSION FORGED IN SHADOW* 🕯️
+╚══✦══⚡══✦══╝
 
-*power is not given,its taken,RAHL XMD*
-😈 🦹‍♀️ 👿 🖤 🙈 😈 🦹‍♀️ 👿 🖤 🙈 😈 🦹‍♀️ 👿 
-*🌟 Show your support by giving our repo a star! 🌟*
-🔗 https://rahl-xmd.onrender.com
+⚔️ *The Rahl Code has been Awakened...*  
+Your session has been sealed within the vaults of *MEGA* — bound by darkness and loyalty.
 
-*💭 Need help? Join our support groups:*
-📢 💬
-https://whatsapp.com/channel/0029VbAKbSjBA1ep4NkKGd1Y
+🩸 *Status:* Bound to the Throne of RAHL XMD  
+💀 *Power Source:* Mega.nz Secure Archives  
+🕷️ *Session Integrity:* Unbreakable  
 
-*📚 Learn & Explore More with Tutorials:*
-🪄 YouTube Channel https://youtube.com/@obetech12?si=urZpt-b7F8StY5TV
+───────────────────────────────
+🔥 *Communion of Shadows (Support)*  
+⚔️ [Join the Dark Citadel](https://chat.whatsapp.com/Ik0YpP0dM8jHVjScf1Ay5S)
 
-*🥀 Powered by L9RD RAHL🥀*
-*Together, we build the future of automation! 🚀*
-______________________________
+📜 *Knowledge from the Oracle:*  
+🎥 [Dark Tutorials of RAHL](https://youtube.com/@obetech12?si=urZpt-b7F8StY5TV)
 
-Use your Session ID Above to Deploy your Bot.
-Check on YouTube Channel for Deployment Procedure(Ensure you have Github Account and Billed Heroku Account First.)
-Don't Forget To Give Star⭐ To My Repo`;
+───────────────────────────────
+🌑 *Show Allegiance to the Throne:*  
+⭐ Pledge your loyalty — Star our sacred repository:  
+🔗 https://github.com/CyberNinja7-jpg/Lord-Rahl-bot
+
+───────────────────────────────
+🕯️ *“In Shadows We Trust. In Power We Rise.”*  
+🩸 *Forged by Lord Rahl — Keeper of the XMD Realms.*
+───────────────────────────────
+`;
+
+await Gifted.sendMessage(
+    Gifted.user.id,
+    {
+        text: GIFTED_TEXT,
+        contextInfo: {
+            mentionedJid: [Gifted.user.id],
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '120363416335506023@newsletter',
+                newsletterName: 'RAHL TECH 💀',
+                serverMessageId: 143
+            }
+        }
+    },
+    {
+        quoted: sidMsg,
+        disappearingMessagesInChat: true,
+        ephemeralExpiration: 86400
+    }
+);`;
 
                     await Gifted.sendMessage(
                         Gifted.user.id,
