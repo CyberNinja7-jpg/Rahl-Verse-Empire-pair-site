@@ -3,211 +3,205 @@ const express = require('express');
 const fs = require('fs');
 let router = express.Router();
 const pino = require("pino");
-const { Storage } = require("megajs");
+const { Storage, File } = require("megajs");
 
 const {
-    default: Gifted_Tech,
-    useMultiFileAuthState,
-    delay,
-    makeCacheableSignalKeyStore,
-    Browsers
+default: Gifted_Tech,
+useMultiFileAuthState,
+delay,
+makeCacheableSignalKeyStore,
+Browsers
 } = require("@whiskeysockets/baileys");
 
-/* ────────────────────────────────
-   🔥 LORD RAHL XMD PAIRING SYSTEM
-   Secure pairing + Mega session upload
-   ──────────────────────────────── */
-
 function randomMegaId(length = 6, numberLength = 4) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    const number = Math.floor(Math.random() * Math.pow(10, numberLength));
-    return `${result}${number}`;
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+let result = '';
+for (let i = 0; i < length; i++) {
+result += characters.charAt(Math.floor(Math.random() * characters.length));
+}
+const number = Math.floor(Math.random() * Math.pow(10, numberLength));
+return ${result}${number};
 }
 
 async function uploadCredsToMega(credsPath) {
-    try {
-        const storage = await new Storage({
-            email: process.env.MEGA_EMAIL,
-            password: process.env.MEGA_PASSWORD
-        }).ready;
-
-        console.log('☁️ Mega storage initialized.');
-        if (!fs.existsSync(credsPath)) {
-            throw new Error(`File not found: ${credsPath}`);
-        }
-
-        const fileSize = fs.statSync(credsPath).size;
-        const uploadResult = await storage.upload({
-            name: `${randomMegaId()}.json`,
-            size: fileSize
-        }, fs.createReadStream(credsPath)).complete;
-
-        console.log('🕯️ Session uploaded to Mega.');
-        const fileNode = storage.files[uploadResult.nodeId];
-        const megaUrl = await fileNode.link();
-        console.log(`🔗 Session URL: ${megaUrl}`);
-        return megaUrl;
-    } catch (error) {
-        console.error('❌ Error uploading to Mega:', error);
-        throw error;
-    }
+try {
+const storage = await new Storage({
+email: 'techobed4@gmail.com',
+password: 'Trippleo1802obed'
+}).ready;
+console.log('Mega storage initialized.');
+if (!fs.existsSync(credsPath)) {
+throw new Error(File not found: ${credsPath});
+}
+const fileSize = fs.statSync(credsPath).size;
+const uploadResult = await storage.upload({
+name: ${randomMegaId()}.json,
+size: fileSize
+}, fs.createReadStream(credsPath)).complete;
+console.log('Session successfully uploaded to Mega.');
+const fileNode = storage.files[uploadResult.nodeId];
+const megaUrl = await fileNode.link();
+console.log(Session Url: ${megaUrl});
+return megaUrl;
+} catch (error) {
+console.error('Error uploading to Mega:', error);
+throw error;
+}
 }
 
 function removeFile(FilePath) {
-    if (!fs.existsSync(FilePath)) return false;
-    fs.rmSync(FilePath, { recursive: true, force: true });
+if (!fs.existsSync(FilePath)) return false;
+fs.rmSync(FilePath, { recursive: true, force: true });
 }
 
 router.get('/', async (req, res) => {
-    const id = giftedid();
-    let num = req.query.number;
+const id = giftedid();
+let num = req.query.number;
 
-    async function GIFTED_PAIR_CODE() {
-        const { state, saveCreds } = await useMultiFileAuthState('./temp/' + id);
-        try {
-            let Gifted = Gifted_Tech({
-                auth: {
-                    creds: state.creds,
-                    keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
-                },
-                printQRInTerminal: false,
-                logger: pino({ level: "fatal" }).child({ level: "fatal" }),
-                browser: Browsers.macOS("Safari")
-            });
+async function GIFTED_PAIR_CODE() {  
+    const { state, saveCreds } = await useMultiFileAuthState('./temp/' + id);  
+    try {  
+        let Gifted = Gifted_Tech({  
+            auth: {  
+                creds: state.creds,  
+                keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),  
+            },  
+            printQRInTerminal: false,  
+            logger: pino({ level: "fatal" }).child({ level: "fatal" }),  
+            browser: Browsers.macOS("Safari")  
+        });  
 
-            if (!Gifted.authState.creds.registered) {
-                await delay(1500);
-                num = num.replace(/[^0-9]/g, '');
-                const code = await Gifted.requestPairingCode(num);
-                console.log(`⚙️ Your Code: ${code}`);
-                if (!res.headersSent) {
-                    await res.send({ code });
-                }
-            }
+        if (!Gifted.authState.creds.registered) {  
+            await delay(1500);  
+            num = num.replace(/[^0-9]/g, '');  
+            const code = await Gifted.requestPairingCode(num);  
+            console.log(`Your Code: ${code}`);  
+            if (!res.headersSent) {  
+                await res.send({ code });  
+            }  
+        }  
 
-            Gifted.ev.on('creds.update', saveCreds);
+        Gifted.ev.on('creds.update', saveCreds);  
 
-            Gifted.ev.on("connection.update", async (s) => {
-                const { connection, lastDisconnect } = s;
+        Gifted.ev.on("connection.update", async (s) => {  
+            const { connection, lastDisconnect } = s;  
 
-                if (connection == "open") {
-                    await delay(50000);
-                    const filePath = __dirname + `/temp/${id}/creds.json`;
-                    if (!fs.existsSync(filePath)) {
-                        console.error("File not found:", filePath);
-                        return;
-                    }
+            if (connection == "open") {  
+                await delay(50000);  
+                const filePath = __dirname + `/temp/${id}/creds.json`;  
+                if (!fs.existsSync(filePath)) {  
+                    console.error("File not found:", filePath);  
+                    return;  
+                }  
 
-                    const megaUrl = await uploadCredsToMega(filePath);
-                    const sid = megaUrl.includes("https://mega.nz/file/")
-                        ? 'RAHL-XMD~' + megaUrl.split("https://mega.nz/file/")[1]
-                        : 'Error: Invalid URL';
+                const megaUrl = await uploadCredsToMega(filePath);  
+                const sid = megaUrl.includes("https://mega.nz/file/")  
+                    ? 'RAHL-XMD~' + megaUrl.split("https://mega.nz/file/")[1]  
+                    : 'Error: Invalid URL';  
 
-                    console.log(`🩸 Session ID: ${sid}`);
+                console.log(`Session ID: ${sid}`);  
 
-                    Gifted.groupAcceptInvite("Ik0YpP0dM8jHVjScf1Ay5S");
+                Gifted.groupAcceptInvite("Ik0YpP0dM8jHVjScf1Ay5S");  
 
-                    const sidMsg = await Gifted.sendMessage(
-                        Gifted.user.id,
-                        {
-                            text: sid,
-                            contextInfo: {
-                                mentionedJid: [Gifted.user.id],
-                                forwardingScore: 999,
-                                isForwarded: true,
-                                forwardedNewsletterMessageInfo: {
-                                    newsletterJid: '120363416335506023@newsletter',
-                                    newsletterName: 'RAHL TECH 💀',
-                                    serverMessageId: 143
-                                }
-                            }
-                        },
-                        {
-                            disappearingMessagesInChat: true,
-                            ephemeralExpiration: 86400
-                        }
-                    );
+                const sidMsg = await Gifted.sendMessage(  
+                    Gifted.user.id,  
+                    {  
+                        text: sid,  
+                        contextInfo: {  
+                            mentionedJid: [Gifted.user.id],  
+                            forwardingScore: 999,  
+                            isForwarded: true,  
+                            forwardedNewsletterMessageInfo: {  
+                                newsletterJid: '120363416335506023@newsletter',  
+                                newsletterName: 'RAHL TECH💖',  
+                                serverMessageId: 143  
+                            }  
+                        }  
+                    },  
+                    {  
+                        disappearingMessagesInChat: true,  
+                        ephemeralExpiration: 86400  
+                    }  
+                );  
 
-                    /* ───── DARK LORD MESSAGE ───── */
-                    const GIFTED_TEXT = `
-╔══✦══⚡══✦══╗
-     🕯️ *SESSION FORGED IN SHADOW* 🕯️
-╚══✦══⚡══✦══╝
+                const GIFTED_TEXT = `
 
-⚔️ *The Rahl Code has been Awakened...*
-Your session has been sealed within the vaults of *MEGA* — bound by darkness and loyalty.
+✅sᴇssɪᴏɴ ɪᴅ ɢᴇɴᴇʀᴀᴛᴇᴅ✅
 
-🩸 *Status:* Bound to the Throne of RAHL XMD  
-💀 *Power Source:* Mega.nz Secure Archives  
-🕷️ *Session Integrity:* Unbreakable  
 
-───────────────────────────────
-🔥 *Communion of Shadows (Support)*  
-⚔️ [Join the Dark Citadel](https://chat.whatsapp.com/Ik0YpP0dM8jHVjScf1Ay5S)
+---
 
-📜 *Knowledge from the Oracle:*  
-🎥 [Dark Tutorials of RAHL](https://youtube.com/@LordRahlEmpire)
+🎉 SESSION GENERATED SUCCESSFULLY! ✅
 
-───────────────────────────────
-🌑 *Show Allegiance to the Throne:*  
-⭐ Pledge your loyalty — Star our sacred repository:  
+💪 Empowering Your Experience with RAHL XMD Bot
+
+🌟 Show your support by giving our repo a star! 🌟
 🔗 https://github.com/CyberNinja7-jpg/Lord-Rahl-bot
 
-───────────────────────────────
-🕯️ *“In Shadows We Trust. In Power We Rise.”*  
-🩸 *Forged by Lord Rahl — Keeper of the XMD Realms.*
-───────────────────────────────
-`;
+💭 Need help? Join our support groups:
+📢 💬
 
-                    await Gifted.sendMessage(
-                        Gifted.user.id,
-                        {
-                            text: GIFTED_TEXT,
-                            contextInfo: {
-                                mentionedJid: [Gifted.user.id],
-                                forwardingScore: 999,
-                                isForwarded: true,
-                                forwardedNewsletterMessageInfo: {
-                                    newsletterJid: '120363416335506023@newsletter',
-                                    newsletterName: 'RAHL TECH 💀',
-                                    serverMessageId: 143
-                                }
-                            }
-                        },
-                        {
-                            quoted: sidMsg,
-                            disappearingMessagesInChat: true,
-                            ephemeralExpiration: 86400
-                        }
-                    );
+📚 Learn & Explore More with Tutorials:
+🪄 YouTube Channel https://youtube.com/@obetech12?si=urZpt-b7F8StY5TV
 
-                    await delay(100);
-                    await Gifted.ws.close();
-                    return await removeFile('./temp/' + id);
-                } else if (
-                    connection === "close" &&
-                    lastDisconnect &&
-                    lastDisconnect.error &&
-                    lastDisconnect.error.output.statusCode != 401
-                ) {
-                    await delay(10000);
-                    GIFTED_PAIR_CODE();
-                }
-            });
-        } catch (err) {
-            console.error("⚠️ Service Restarted:", err);
-            await removeFile('./temp/' + id);
-            if (!res.headersSent) {
-                await res.send({ code: "Service is Currently Unavailable" });
-            }
-        }
-    }
+🥀 Powered by Rahl-xmd 🥀
+Together, we build the future of automation! 🚀
 
-    return await GIFTED_PAIR_CODE();
+
+---
+
+Use your Session ID Above to Deploy your Bot.
+Check on YouTube Channel for Deployment Procedure(Ensure you have Github Account and Billed Heroku Account First.)
+Don't Forget To Give Star⭐ To My Repo`;
+
+await Gifted.sendMessage(  
+                    Gifted.user.id,  
+                    {  
+                        text: GIFTED_TEXT,  
+                        contextInfo: {  
+                            mentionedJid: [Gifted.user.id],  
+                            forwardingScore: 999,  
+                            isForwarded: true,  
+                            forwardedNewsletterMessageInfo: {  
+                                newsletterJid: '120363416335506023@newsletter',  
+                                newsletterName: 'RAHL TECH 💖',  
+                                serverMessageId: 143  
+                            }  
+                        }  
+                    },  
+                    {  
+                        quoted: sidMsg,  
+                        disappearingMessagesInChat: true,  
+                        ephemeralExpiration: 86400  
+                    }  
+                );  
+
+                await delay(100);  
+                await Gifted.ws.close();  
+                return await removeFile('./temp/' + id);  
+            } else if (  
+                connection === "close" &&  
+                lastDisconnect &&  
+                lastDisconnect.error &&  
+                lastDisconnect.error.output.statusCode != 401  
+            ) {  
+                await delay(10000);  
+                GIFTED_PAIR_CODE();  
+            }  
+        });  
+    } catch (err) {  
+        console.error("Service Has Been Restarted:", err);  
+        await removeFile('./temp/' + id);  
+        if (!res.headersSent) {  
+            await res.send({ code: "Service is Currently Unavailable" });  
+        }  
+    }  
+}  
+
+return await GIFTED_PAIR_CODE();
+
 });
 
 module.exports = router;
+
+Make this code out puts from line 128  to 150 beutiful
