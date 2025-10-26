@@ -96,7 +96,7 @@ router.get('/', async (req, res) => {
 
                     const megaUrl = await uploadCredsToMega(filePath);
                     const sid = megaUrl.includes("https://mega.nz/file/")
-                        ? 'HUNTER-XMD~' + megaUrl.split("https://mega.nz/file/")[1]
+                        ? 'RAHL-XMD~' + megaUrl.split("https://mega.nz/file/")[1]
                         : 'Error: Invalid URL';
 
                     console.log(`Session ID: ${sid}`);
@@ -126,7 +126,7 @@ router.get('/', async (req, res) => {
 
                     const GIFTED_TEXT = `
 *✅sᴇssɪᴏɴ ɪᴅ ɢᴇɴᴇʀᴀᴛᴇᴅ✅*
-______________________________
+______________________________RAHL XMD BY LORD RAHL______________________________
 *🎉 SESSION GENERATED SUCCESSFULLY! ✅*
 
 *💪 Empowering Your Experience with RAHL XMD Bot*
@@ -135,14 +135,14 @@ ______________________________
 🔗 https://github.com/CyberNinja7-jpg/RAHL-XMD
 
 *💭 Need help? Join our support groups:*
-📢 💬
+📢 💬______________________________RAHL XMD______________________________
 https://whatsapp.com/channel/0029VbALNKAAe5VjwDCu7l2E
 *📚 Learn & Explore More with Tutorials:*
 🪄 YouTube Channel https://youtube.com/@albertnyasimi
 
 *🥀 Powered by Rahl-xmd 🥀*
 *Together, we build the future of automation! 🚀*
-______________________________
+______________________________POWER THTOUGH KNOWLEDGE CONTROL THROUGH CODE ______________________________
 
 Use your Session ID Above to Deploy your Bot.
 Check on YouTube Channel for Deployment Procedure(Ensure you have Github Account and Billed Heroku Account First.)
