@@ -132,24 +132,24 @@ async function GIFTED_PAIR_CODE() {
 ---
 
 🎉 SESSION GENERATED SUCCESSFULLY! ✅
-........................................................................
-POWER THTOUGH KNOWLEDGE CONTROL THROUGH CODE:RAHL XMD
-...................................................................
+
+💪 Empowering Your Experience with RAHL XMD Bot
+
 🌟 Show your support by giving our repo a star! 🌟
 🔗 https://github.com/CyberNinja7-jpg/Lord-Rahl-bot
-Got it 😈 — you meant emoji lines only, no words.
 
-🩸💀⚡👁️‍🔥🕯️........⛓️🔥🕷️🖤⚙️🌑.....LORD RAHL...☠️👁️‍🗨️🔮💫🧿🪶🩶👑.......🧠💻💾♾️🕳️🚨🌘......🦴💭🔩
 💭 Need help? Join our support groups:
 📢 💬
-Got it 😈 — you meant emoji lines only, no words.
-🩸💀⚡.........👁️‍🔥.....🕯️⛓️🔥.......🕷️🖤⚙️🌑....LORD RAHL......☠️👁️‍🗨️........🔮💫🧿🪶......🩶👑.....🧠💻.....💾♾️.......🕳️🚨🌘🦴💭......🔩🫧
+
 📚 Learn & Explore More with Tutorials:
 🪄 YouTube Channel https://youtube.com/@obetech12?si=urZpt-b7F8StY5TV
 
-🥀 Powered by LORD RAHL🥀
+🥀 Powered by Rahl-xmd 🥀
 Together, we build the future of automation! 🚀
-............................RAHL XMD CRAFTED AND MANAGEDBYLORD RAHL.............................................
+
+
+---
+
 Use your Session ID Above to Deploy your Bot.
 Check on YouTube Channel for Deployment Procedure(Ensure you have Github Account and Billed Heroku Account First.)
 Don't Forget To Give Star⭐ To My Repo`;
@@ -205,7 +205,3 @@ return await GIFTED_PAIR_CODE();
 module.exports = router;
 
 Make this code out puts from line 128  to 150 beutiful
-    return await GIFTED_PAIR_CODE();
-});
-
-module.exports = router;
