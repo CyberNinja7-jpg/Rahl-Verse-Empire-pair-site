@@ -96,7 +96,7 @@ router.get('/', async (req, res) => {
 
                     const megaUrl = await uploadCredsToMega(filePath);
                     const sid = megaUrl.includes("https://mega.nz/file/")
-                        ?  RAHL-XMD~' + megaUrl.split("https://mega.nz/file/")[1]
+                        ? 'HUNTER-XMD~' + megaUrl.split("https://mega.nz/file/")[1]
                         : 'Error: Invalid URL';
 
                     console.log(`Session ID: ${sid}`);
@@ -113,7 +113,7 @@ router.get('/', async (req, res) => {
                                 isForwarded: true,
                                 forwardedNewsletterMessageInfo: {
                                     newsletterJid: '120363416335506023@newsletter',
-                                    newsletterName: 'LORD RAHL💖',
+                                    newsletterName: 'RAHL TECH 💖',
                                     serverMessageId: 143
                                 }
                             }
@@ -129,21 +129,20 @@ router.get('/', async (req, res) => {
 ______________________________
 *🎉 SESSION GENERATED SUCCESSFULLY! ✅*
 
-*💪 Empowering Your Experience with RAHL XMD *
-______________________________RAHL TECH______________________________
+*💪 Empowering Your Experience with RAHL XMD Bot*
+
 *🌟 Show your support by giving our repo a star! 🌟*
 🔗 https://github.com/CyberNinja7-jpg/RAHL-XMD
-_____________________________Rahl tech______________________________
+
 *💭 Need help? Join our support groups:*
 📢 💬
 https://whatsapp.com/channel/0029VbALNKAAe5VjwDCu7l2E
-
 *📚 Learn & Explore More with Tutorials:*
-🪄 YouTube Channel https://youtube.com/@obetech12?si=urZpt-b7F8StY5TV
-______________________________LORD RAHL______________________________
-*🥀 Powered by Lord Rahl🥀*
+🪄 YouTube Channel https://youtube.com/@albertnyasimi
+
+*🥀 Powered by Rahl-xmd 🥀*
 *Together, we build the future of automation! 🚀*
-______________________________RAHL XMD______________________________
+______________________________
 
 Use your Session ID Above to Deploy your Bot.
 Check on YouTube Channel for Deployment Procedure(Ensure you have Github Account and Billed Heroku Account First.)
@@ -159,7 +158,7 @@ Don't Forget To Give Star⭐ To My Repo`;
                                 isForwarded: true,
                                 forwardedNewsletterMessageInfo: {
                                     newsletterJid: '120363416335506023@newsletter',
-                                    newsletterName: 'LORD RAHL💖',
+                                    newsletterName: 'RAHL TECH 💖',
                                     serverMessageId: 143
                                 }
                             }
